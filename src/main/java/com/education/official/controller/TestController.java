@@ -31,7 +31,17 @@ public class TestController {
     public ModelAndView testJsp(ModelAndView modelAndView) throws Exception {
         String s = testService.testMethod();
 
-        modelAndView.setViewName("testOne");
+        modelAndView.setViewName("backstage/jsp/testOne");
+        modelAndView.addObject("hello",s);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("indexJsp")
+    public ModelAndView logginJsp(ModelAndView modelAndView) throws Exception {
+        String s = testService.testMethod();
+
+        modelAndView.setViewName("backstage/jsp/index");
         modelAndView.addObject("hello",s);
 
         return modelAndView;
