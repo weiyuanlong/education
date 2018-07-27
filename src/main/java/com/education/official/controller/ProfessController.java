@@ -138,6 +138,7 @@ public class ProfessController extends BaseController {
     @ResponseBody
     public String deleteProfess(Profess profess) {
         profess.setDeleted(true);
+        professService.updateProfess(profess);
         return  setJsonMessage(true,"删除成功");
     }
 
