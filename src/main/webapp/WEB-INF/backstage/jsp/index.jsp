@@ -60,26 +60,10 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
                 <li class="layui-nav-item">
-                    <a class="" href="javascript:;"><img src="<%=imagesPath%>/nav_icon_hot_20.png"><span>常用菜单</span></a>
+                    <a href="javascript:;"><img src="<%=imagesPath%>/nav_icon_car_20.png"/><span>专业管理</span></a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" kit-target data-options="{url:'${pageContext.request.contextPath }/authc/organization/fleetList.html',icon:'',title:'车队信息',id:'111'}">
-                                <!--<i class="layui-icon">&#xe6c6;</i>--><span>车队信息</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" data-url="form.html"  kit-target data-options="{url:'<%=applicationPath%>/authc/vehicleList.html',icon:'',title:'车辆信息',id:'100'}"><span> 车辆信息</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" data-url="nav.html"   kit-target data-options="{url:'<%=applicationPath%>/authc/driver/driverList.html',icon:'',title:'驾驶员信息',id:'103'}"><span>驾驶员信息</span></a>
-                        </dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><img src="<%=imagesPath%>/nav_icon_car_20.png"/><span>车辆管理</span></a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;" kit-target data-options="{url:'${pageContext.request.contextPath }/authc/organization/fleetList.html',icon:'',title:'车队信息',id:'111'}">
-                                <!--<i class="layui-icon">&#xe6c6;</i>--><span> 车队信息</span></a>
+                            <a href="javascript:;" kit-target data-options="{url:'${pageContext.request.contextPath }/professList',icon:'',title:'专业管理',id:'111'}"><span> 专业管理</span></a>
                         </dd>
                         <dd>
                             <a href="javascript:;" data-url="form.html"  kit-target data-options="{url:'<%=applicationPath%>/authc/vehicleList.html',icon:'',title:'车辆信息',id:'100'}"><span> 车辆信息</span></a>

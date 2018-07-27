@@ -1,0 +1,146 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.education.official.mapper.TestMapper">
+
+    <sql id="professInfo">
+         o.id,
+        o.deleted,
+        o.invalid,
+        o.`level`,
+        o.parent_id AS parentId,
+        o.content,
+        o.profess_name AS professName,
+        o.quart_name AS quartName,
+        o.salary,
+        o.student_num AS studentNum,
+        o.create_time,
+        o.update_time
+    </sql>
+
+    <!-- 查询列表数据 -->
+    <select id="findProfessList" parameterType="map" resultType="map">
+        SELECT
+            <include refid="equipInfo" />
+        FROM
+            official_profess o
+        WHERE
+            deleted = 0
+        AND
+            invalid = 0
+    </select>
+
+    <select id="findProfessById" parameterType="java.lang.Integer" >
+        select
+            <include refid="equipInfo" />
+        FROM
+            official_profess o
+        WHERE
+            id = #{id}
+    </select>
+
+    <!--新增专业-->
+    <insert id="insertProfess" parameterType="com.education.official.pojo.Profess">
+        INSERT INTO official_profess
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="level != null" >
+                `level`,
+            </if>
+            <if test="parentId != null" >
+                parent_id,
+            </if>
+            <if test="content != null and content != ''" >
+                content,
+            </if>
+            <if test="professName != null and professName != ''" >
+                profess_name,
+            </if>
+            <if test="quartName != null and quartName != ''" >
+                quart_name,
+            </if>
+            <if test="salary != null and salary != ''" >
+                salary,
+            </if>
+            <if test="studentNum != null and studentNum != ''" >
+                student_num,
+            </if>
+            <if test="remark != null and remark != ''" >
+                remark,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="level != null" >
+                #{level},
+            </if>
+            <if test="parentId != null" >
+                #{parentId},
+            </if>
+            <if test="content != null and content != ''" >
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="professName != null and professName != ''" >
+                #{professName,jdbcType=VARCHAR},
+            </if>
+            <if test="quartName != null and quartName != ''" >
+                #{quartName,jdbcType=VARCHAR},
+            </if>
+            <if test="salary != null and salary != ''" >
+                #{salary,jdbcType=VARCHAR},
+            </if>
+            <if test="studentNum != null" >
+                #{studentNum,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null and remark != ''" >
+                #{remark},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改专业 -->
+    <update id="updateProfess" parameterType="com.education.official.pojo.Profess">
+        UPDATE official_profess
+        <set>
+            <if test="professName != null and professName != ''" >
+                profess_name = #{professName,jdbcType=VARCHAR},
+            </if>
+            <if test="quartName != null and quartName != '' " >
+                quart_name = #{quartName,jdbcType=VARCHAR},
+            </if>
+            <if test="studentNum != null and studentNum != ''" >
+                student_num = #{studentNum,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null" >
+                parent_id = #{parentId},
+            </if>
+            <if test="salary != null and salary != ''" >
+                salary = #{salary,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null and content != ''" >
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicle != null and vehicle != ''" >
+                parent_id = #{vehicle,jdbcType=VARCHAR},
+            </if>
+            <if test="invalid != null" >
+                invalid = #{invalid,jdbcType=BIT},
+            </if>
+            <if test="deleted != null" >
+                deleted = #{deleted,jdbcType=BIT},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE
+          id = #{id}
+    </update>
+
+
+</mapper>
