@@ -4,6 +4,22 @@
 
 <mapper namespace="com.education.official.mapper.ProfessMapper">
 
+    <sql id="professList">
+         o.id,
+        o.deleted,
+        o.invalid,
+        o.`level`,
+        o.parent_id AS parentId,
+        o.content,
+        o.profess_name AS professName,
+        o.quart_name AS quartName,
+        o.salary,
+        o.student_num AS studentNum,
+        o.create_time AS createTime ,
+        o.update_time AS updateTime,
+        o2.profess_name AS parentName
+    </sql>
+
     <sql id="professInfo">
          o.id,
         o.deleted,
@@ -22,11 +38,14 @@
     <!-- 查询列表数据 -->
     <select id="findProfessList" parameterType="map" resultType="map">
         SELECT
-            <include refid="professInfo" />
+            <include refid="professList" />
         FROM
             official_profess o
+        LEFT JOIN official_profess o2 ON o.parent_id = o2.id
         WHERE
-            deleted = 0
+            o.deleted = 0
+        AND
+            o.profess_name LIKE '%${professName}%'
     </select>
 
     <!-- 查询所有一级专业 -->

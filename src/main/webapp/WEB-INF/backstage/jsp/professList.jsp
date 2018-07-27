@@ -23,7 +23,7 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">专业名称</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="" lay-verify="" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    <input type="text" name="professName" lay-verify="" placeholder="请输入" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                         </div>
@@ -97,10 +97,11 @@
         ,{field: 'quartName', title: '岗位', width: '10%'}
         ,{field: 'salary', title: '薪资待遇', width: '10%'}
         ,{field: 'studentNum', title: '招生数量', width: '10%'}
+        ,{field: 'parentName', title: '上级专业', width: '10%'}
         ,{field: 'invalid', title: '状态', width:'5%',toolbar: '#statusTool'}
         ,{field: 'createTime', title: '创建时间', width:'12.5%'}
         ,{field: 'updateTime', title: '修改时间', width:'12.5%'}
-        ,{field: 'operation', title: '操作', width:'25%',toolbar: '#opreationTool', unresize: true}
+        ,{field: 'operation', title: '操作', width:'15.2%',toolbar: '#opreationTool', unresize: true}
     ]];
 
     $(function(){
