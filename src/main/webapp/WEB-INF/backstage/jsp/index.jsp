@@ -60,6 +60,16 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
                 <li class="layui-nav-item">
+                    <a href="javascript:;"><img src="<%=imagesPath%>/nav_icon_set_20.png"/><span> 基础管理</span></a>
+                    <dl class="layui-nav-child">
+                        <!-- 设备列表 -->
+                        <dd>
+                            <a href="javascript:;" data-url=""  kit-target data-options="{url:'<%=applicationPath%>/getFilePage',icon:'',title:'滚动图片设置',id:'100'}"><span> 滚动图片设置</span></a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item">
                     <a href="javascript:;"><img src="<%=imagesPath%>/nav_icon_car_20.png"/><span>专业管理</span></a>
                     <dl class="layui-nav-child">
                         <dd>
@@ -73,15 +83,7 @@
                         </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><img src="<%=imagesPath%>/nav_icon_set_20.png"/><span> 设备管理</span></a>
-                    <dl class="layui-nav-child">
-                        <!-- 设备列表 -->
-                        <dd>
-                            <a href="javascript:;" data-url=""  kit-target data-options="{url:'<%=applicationPath%>/authc/equip/equipList.html',icon:'',title:'设备信息',id:'220'}"><span> 设备信息</span></a>
-                        </dd>
-                    </dl>
-                </li>
+
                 <li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'运维管理',id:'300'}"><img src="<%=imagesPath%>/nav_icon_maintain_20.png"><span> 运维管理</span></a></li>
                 <li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'验收管理',id:'400'}"><img src="<%=imagesPath%>/nav_icon_statistics_20.png"><span> 验收管理</span></a></li>
                 <li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'平台管理',id:'500'}"><img src="<%=imagesPath%>/nav_icon_platform_20.png"><span> 平台管理</span></a></li>
