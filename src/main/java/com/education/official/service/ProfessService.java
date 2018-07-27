@@ -3,6 +3,7 @@ package com.education.official.service;
 import com.education.official.pojo.Profess;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,5 +44,12 @@ public interface ProfessService {
      * @return
      */
     Map findProfessById(Integer id);
+
+    /**
+     * 查询一级专业
+     *
+     * @return
+     */
+    List<Map> findParentProfess();
 
 }

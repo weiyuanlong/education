@@ -137,7 +137,7 @@
 <script src="<%=ztreePath%>/js/jquery.ztree.all.min.js"></script>
 <script>
     var form = layui.form;
-    var dictType = "";
+    var parentUrl = "<%= applicationPath%>/findProfessParents";
 
     $(function(){
         var id='${id}';
@@ -146,6 +146,7 @@
             initData(id);
         } else {
             initTpl({});
+            createSelectId2("#parentId", parentUrl, "professName", "","");
         }
     });
 
@@ -162,9 +163,8 @@
             mylayer.closeAll();
             if(data.success){
                 initTpl(data.data);
-                dictType = data.data.base_type;
                 // 加载下拉框
-
+                createSelectId2("#parentId", parentUrl, "professName", data.data.parentId,"");
             }else{
                 mylayer.alert(data.msg);
             }
@@ -180,6 +180,7 @@
      * 加载模板
      */
     function  initTpl(data){
+        console.log(data);
         var laytpl = layui.laytpl;
         var getUserTpl = dictTypeInfoModle.innerHTML;
         var view =$("#dictTypeInfo");
@@ -187,9 +188,6 @@
             view.html(html);
             form.render();
         });
-
-        console.log(data);
-        // createSelectId2("#equipType", "", "baseCode", data.equip_type, "equipment_type");
     }
 
     /**

@@ -65,4 +65,13 @@ public class ProfessServiceImpl extends BaseService implements ProfessService {
         return professMapper.findProfessById(id);
     }
 
+    /**
+     * @see ProfessService#findParentProfess()
+     *
+     */
+    @Override
+    public List<Map> findParentProfess() {
+        return professMapper.findParentProfess();
+    }
+
 }

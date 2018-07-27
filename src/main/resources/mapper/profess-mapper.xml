@@ -29,6 +29,19 @@
             deleted = 0
     </select>
 
+    <!-- 查询所有一级专业 -->
+    <select id="findParentProfess" resultType="map">
+        SELECT
+            o.id,
+            o.profess_name AS professName
+        FROM
+            official_profess o
+        WHERE
+            deleted = 0
+        AND
+            invalid = 0
+    </select>
+
     <select id="findProfessById" parameterType="java.lang.Integer" resultType="map" >
         select
             <include refid="professInfo" />

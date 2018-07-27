@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -140,6 +141,18 @@ public class ProfessController extends BaseController {
         profess.setDeleted(true);
         professService.updateProfess(profess);
         return  setJsonMessage(true,"删除成功");
+    }
+
+    @RequestMapping("findProfessParents")
+    @ResponseBody
+    public String findProfessParents() {
+        try{
+            List<Map> profess = professService.findParentProfess();
+            return setJsonMessage(true,"查询成功",profess);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return setJsonMessage(false,"查询失败");
+        }
     }
 
 }

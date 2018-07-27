@@ -45,4 +45,11 @@ public interface ProfessMapper {
      */
     Map findProfessById(Integer id);
 
+    /**
+     * 查询所有一级专业
+     *
+     * @return
+     */
+    List<Map> findParentProfess();
+
 }
