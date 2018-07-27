@@ -54,7 +54,7 @@
          */
         function deleteData(id,title,ctrl) {
             var title =title+"-确定删除？";
-            var url="<%=applicationPath %>/authc/"+ctrl+".html";
+            var url="<%=applicationPath %>/"+ctrl;
             var data = {id:id}
             var successFun=function(data){
                 mylayer.closeAll();
@@ -80,7 +80,7 @@
                 title = "确定停用吗？";
             else
                 title = "确定恢复吗？";
-            var url = "<%=applicationPath %>/authc/"+ctrl+".html";
+            var url = "<%=applicationPath %>/"+ctrl;
             var data = {id: id, invalid: invalid};
             var successFun=function(data){
                 mylayer.closeAll();

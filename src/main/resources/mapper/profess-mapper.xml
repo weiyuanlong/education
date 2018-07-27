@@ -2,7 +2,7 @@
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.education.official.mapper.TestMapper">
+<mapper namespace="com.education.official.mapper.ProfessMapper">
 
     <sql id="professInfo">
          o.id,
@@ -15,25 +15,23 @@
         o.quart_name AS quartName,
         o.salary,
         o.student_num AS studentNum,
-        o.create_time,
-        o.update_time
+        o.create_time AS createTime ,
+        o.update_time AS updateTime
     </sql>
 
     <!-- 查询列表数据 -->
     <select id="findProfessList" parameterType="map" resultType="map">
         SELECT
-            <include refid="equipInfo" />
+            <include refid="professInfo" />
         FROM
             official_profess o
         WHERE
             deleted = 0
-        AND
-            invalid = 0
     </select>
 
-    <select id="findProfessById" parameterType="java.lang.Integer" >
+    <select id="findProfessById" parameterType="java.lang.Integer" resultType="map" >
         select
-            <include refid="equipInfo" />
+            <include refid="professInfo" />
         FROM
             official_profess o
         WHERE
@@ -65,9 +63,6 @@
             <if test="studentNum != null and studentNum != ''" >
                 student_num,
             </if>
-            <if test="remark != null and remark != ''" >
-                remark,
-            </if>
             <if test="createTime != null" >
                 create_time,
             </if>
@@ -93,9 +88,6 @@
             </if>
             <if test="studentNum != null" >
                 #{studentNum,jdbcType=VARCHAR},
-            </if>
-            <if test="remark != null and remark != ''" >
-                #{remark},
             </if>
             <if test="createTime != null" >
                 #{createTime,jdbcType=TIMESTAMP},
@@ -124,9 +116,6 @@
             </if>
             <if test="content != null and content != ''" >
                 content = #{content,jdbcType=VARCHAR},
-            </if>
-            <if test="vehicle != null and vehicle != ''" >
-                parent_id = #{vehicle,jdbcType=VARCHAR},
             </if>
             <if test="invalid != null" >
                 invalid = #{invalid,jdbcType=BIT},

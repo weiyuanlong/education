@@ -34,13 +34,14 @@ public class Profess implements Serializable {
     /** 招生数量 */
     private String studentNum;
 
-    private boolean invalid;
+    private Boolean invalid;
 
-    private boolean deleted;
+    private Boolean deleted;
 
     private Date createTime;
 
     private Date updateTime;
+
 
     public Integer getId() {
         return id;
@@ -106,19 +107,19 @@ public class Profess implements Serializable {
         this.studentNum = studentNum;
     }
 
-    public boolean isInvalid() {
+    public Boolean getInvalid() {
         return invalid;
     }
 
-    public void setInvalid(boolean invalid) {
+    public void setInvalid(Boolean invalid) {
         this.invalid = invalid;
     }
 
-    public boolean isDeleted() {
+    public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(boolean deleted) {
+    public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
 

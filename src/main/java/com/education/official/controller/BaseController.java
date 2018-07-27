@@ -3,7 +3,10 @@ package com.education.official.controller;
 import com.education.official.message.JsonMessage;
 import com.education.official.message.PageResultInfo;
 import com.github.pagehelper.PageInfo;
+import com.polaris.base.utils.date.DateUtils;
 import com.polaris.base.utils.map.MapUtils;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -115,6 +118,20 @@ public class BaseController {
              hasMap = (HashMap<String, Object>) object;
         else
              hasMap= (HashMap) MapUtils.toMap(object);
+
+        for (String key:hasMap.keySet()) {
+            Object obj=hasMap.get(key);
+
+            //格式化时间
+            if(obj instanceof Date){
+                hasMap.put(key, DateUtils.convertToString((Date) obj,DateUtils.YYYYMMDDHHMMSS_W_C));
+            }
+
+            //防止long 失真
+            if(obj instanceof Long){
+                hasMap.put(key,obj==null?"":obj.toString());
+            }
+        }
 
     }
 

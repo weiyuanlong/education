@@ -119,7 +119,7 @@
                     <!-- 备注 -->
                     <label class="layui-form-label">描述</label>
                     <div class="layui-input-inline">
-                        <textarea placeholder="请输入" name="content"  class="layui-textarea">{{d.remark==undefined?'':d.remark}}</textarea>
+                        <textarea placeholder="请输入" name="content"  class="layui-textarea">{{d.content==undefined?'':d.content}}</textarea>
                     </div>
                 </div>
 

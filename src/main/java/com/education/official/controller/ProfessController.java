@@ -60,6 +60,7 @@ public class ProfessController extends BaseController {
     public String findProfessList(Map paramMap) {
         try {
             PageInfo professList = professService.findProfessList(paramMap);
+            convertList(professList);
             return setPageResultInfo(true,"查询成功",professList);
         }catch (Exception e) {
             return setPageResultInfo(true,"查询失败");
@@ -106,6 +107,38 @@ public class ProfessController extends BaseController {
             e.printStackTrace();
             return setJsonMessage(true,"添加/编辑失败");
         }
+    }
+
+    /**
+     * 修改专业状态
+     *
+     * @param profess
+     * @return
+     */
+    @RequestMapping("updateProfess")
+    @ResponseBody
+    public String updateProfess(Profess profess) {
+
+        try{
+            professService.updateProfess(profess);
+            return setJsonMessage(true,"修改成功");
+        }catch (Exception e) {
+            e.printStackTrace();
+            return setJsonMessage(false,"修改失败");
+        }
+    }
+
+    /**
+     * 删除专业
+     *
+     * @param profess
+     * @return
+     */
+    @RequestMapping("deleteProfess")
+    @ResponseBody
+    public String deleteProfess(Profess profess) {
+        profess.setDeleted(true);
+        return  setJsonMessage(true,"删除成功");
     }
 
 }

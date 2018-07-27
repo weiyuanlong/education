@@ -68,20 +68,27 @@
 </script>
 <script type="text/html" id="opreationTool">
     <div style="width: 100%;text-align: center;">
-        <a class="opreation" onclick="viewUser('{{d.id}}','{{d.userName}}')" >详情</a>
+        <a class="opreation" onclick="viewUser('{{d.id}}','{{d.professName}}')" >详情</a>
         &nbsp;&nbsp;<span class="dispan">|</span>&nbsp;&nbsp;
-        <a class="opreation" onclick="editUser('{{d.id}}','{{d.userName}}')" >编辑</a>
+        <a class="opreation" onclick="editUser('{{d.id}}','{{d.professName}}')" >编辑</a>
         &nbsp;&nbsp;<span class="dispan">|</span>&nbsp;&nbsp;
-        <a class="opreation" onclick="deleteData('{{d.id}}','{{d.userName}}','deleteUser')">删除</a>
+        <a class="opreation" onclick="deleteData('{{d.id}}','{{d.professName}}','deleteProfess')">删除</a>
         &nbsp;&nbsp;<span class="dispan">|</span>&nbsp;&nbsp;
-        {{#  if(d.userState == 1){ }}
-            <a class="opreation" onclick="update('{{d.id}}',2)">停用</a>
+        {{#  if(d.invalid){ }}
+            <a class="opreation" style="color: red" onclick="invalid('{{d.id}}',false,'updateProfess')">启用</a>
         {{#  } else { }}
-            <a class="opreation" style="color: red" onclick="update('{{d.id}}',1)">启用</a>
+            <a class="opreation" onclick="invalid('{{d.id}}',true,'updateProfess')">停用</a>
         {{#  } }}
     </div>
 </script>
 
+<script type="text/html" id="statusTool">
+    {{#  if(d.invalid){ }}
+        停用
+    {{#  } else { }}
+        正常
+    {{#  } }}
+</script>
 <script>
     var searchUrl = "<%=applicationPath %>/findProfessList";
     var cols=[[ //标题栏
@@ -89,10 +96,10 @@
         ,{field: 'professName', title: '专业名称', width:'10%'}
         ,{field: 'quartName', title: '岗位', width: '10%'}
         ,{field: 'salary', title: '薪资待遇', width: '10%'}
-        ,{field: 'userStateName', title: '招生数量', width: '10%'}
-        ,{field: 'loginLastTime', title: '状态', width:'10%'}
-        ,{field: 'createTime', title: '创建时间', width:'10%'}
-        ,{field: 'createTime', title: '修改时间', width:'10%'}
+        ,{field: 'studentNum', title: '招生数量', width: '10%'}
+        ,{field: 'invalid', title: '状态', width:'5%',toolbar: '#statusTool'}
+        ,{field: 'createTime', title: '创建时间', width:'12.5%'}
+        ,{field: 'updateTime', title: '修改时间', width:'12.5%'}
         ,{field: 'operation', title: '操作', width:'25%',toolbar: '#opreationTool', unresize: true}
     ]];
 
