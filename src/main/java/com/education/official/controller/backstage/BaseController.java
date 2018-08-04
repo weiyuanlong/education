@@ -1,4 +1,4 @@
-package com.education.official.controller;
+package com.education.official.controller.backstage;
 
 import com.education.official.message.JsonMessage;
 import com.education.official.message.PageResultInfo;

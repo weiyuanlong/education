@@ -59,13 +59,13 @@
      * 图片上传
      * @param file
      */
-    function previewImage(file) {
-        var MAXWIDTH  = 90;
-        var MAXHEIGHT = 90;
-        var div = document.getElementById('preview');
+    function previewImage(file,fileName,imghead,previewImg,preview) {
+        var MAXWIDTH  = 800;
+        var MAXHEIGHT = 300;
+        var div = document.getElementById(preview);
         if (file.files && file.files[0]) {
-            div.innerHTML ='<img id=imghead onclick=$("#previewImg").click()>';
-            var img = document.getElementById('imghead');
+            div.innerHTML ='<img id='+imghead+' onclick=$('+previewImg+').click()>';
+            var img = document.getElementById(imghead);
             img.onload = function(){
                 var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
                 img.width  =  rect.width;
@@ -81,26 +81,25 @@
             var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
             file.select();
             var src = document.selection.createRange().text;
-            div.innerHTML = '<img id=imghead>';
-            var img = document.getElementById('imghead');
+            div.innerHTML = '<img id='+imghead+'>';
+            var img = document.getElementById(imghead);
             img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
             var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
             status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
             div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
         }
-        logoUpload();
+        logoUpload(fileName,previewImg);
     }
 
     /**
      * logo图片上传
      */
-    function logoUpload() {
+    function logoUpload(fileName,previewImg) {
         var formData = new FormData();
-        formData.append("orgLogo", $("#previewImg")[0].files[0]);
-        formData.append("logoPath", $("#driverLogo").val());
+        formData.append("orgLogo", $(previewImg)[0].files[0]);
         $.ajax({
             type: 'POST',
-            url: "<%= applicationPath%>/authc/driver/logoUpload",
+            url: "<%= applicationPath%>/logoUpload?fileName="+fileName,
             dataType:"json",
             data: formData,
             async: false,
@@ -110,7 +109,6 @@
             scriptCharset: 'utf-8',
             success: function(data){
                 console.log(data);
-                $("#driverLogo").val(data.message);
             }
         });
     }
@@ -138,27 +136,54 @@
 </script>
 
 <script type="text/html" id="vehicleInfoModle">
-    <form class="layui-form" id="myForm" method="post" action = "<%= applicationPath%>${requestScope.id==null?'/authc/driver/addDriverInfo.html':'/authc/driver/editDriverInfo.html'}">
-        <input type="hidden" name="id" value="${requestScope.id==null||requestScope.id==''?0:requestScope.id}"/>
+    <form class="layui-form" id="myForm" method="post" action = "">
 
         <div class="layui-row layui-col-space15">
             <div class="layui-col-xs12 layui-col-md12">
                 <div class="portlet box">
-                    <div class="portlet-header">
-                        <!-- 司机基本详情 -->
-                        <label class="layui-form-label" ><nobr>图片上传</nobr></label>
-                        <div class="tools"></div>
-                    </div>
                     <div class="portlet-body">
                         <div class="layui-form-item">
                             <!-- 图片上传 -->
                             <div class="layui-inline">
-                                <label class="layui-form-label" >图片</label>
-                                <div class="layui-inline" id="preview">
-                                    <img id="imghead" style="width:104px;height:104px" border="0" src="{{d.logo_path==undefined?'<%=imagesPath%>/cross.png':'<%=imagesPath%>/'+d.showImg}}" onclick="$('#previewImg').click();">
+                                <label class="layui-form-label" >图片1</label>
+                                <div class="layui-inline" id="preview1">
+                                    <img id="imghead1" style="width:800px;height:300px" border="0" src="<%=applicationPath%>/static/images/banner/banner1.jpg" onclick="$('#previewImg1').click();">
                                 </div>
-                                <input type="file" onchange="previewImage(this)" style="display: none;" id="previewImg">
-                                <input type = "hidden" name = "logoPath" id = "driverLogo">
+                                <input type="file" onchange="previewImage(this,'banner1.jpg','imghead1','#previewImg1','preview1')" style="display: none;" id="previewImg1">
+                            </div>
+                            <input type="hidden" name="orgLogo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs12 layui-col-md12">
+                <div class="portlet box">
+                    <div class="portlet-body">
+                        <div class="layui-form-item">
+                            <!-- 图片上传 -->
+                            <div class="layui-inline">
+                                <label class="layui-form-label" >图片2</label>
+                                <div class="layui-inline" id="preview2">
+                                    <img id="imghead2" style="width:800px;height:300px" border="0" src="<%=applicationPath%>/static/images/banner/banner2.jpg" onclick="$('#previewImg2').click();">
+                                </div>
+                                <input type="file" onchange="previewImage(this,'banner2.jpg','imghead2','#previewImg2','preview2')" style="display: none;" id="previewImg2">
+                            </div>
+                            <input type="hidden" name="orgLogo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs12 layui-col-md12">
+                <div class="portlet box">
+                    <div class="portlet-body">
+                        <div class="layui-form-item">
+                            <!-- 图片上传 -->
+                            <div class="layui-inline">
+                                <label class="layui-form-label" >图片1</label>
+                                <div class="layui-inline" id="preview3">
+                                    <img id="imghead3" style="width:800px;height:300px" border="0" src="<%=applicationPath%>/static/images/banner/banner3.jpg" onclick="$('#previewImg3').click();">
+                                </div>
+                                <input type="file" onchange="previewImage(this,'banner3.jpg','imghead3','#previewImg1','preview3')" style="display: none;" id="previewImg3">
                             </div>
                             <input type="hidden" name="orgLogo">
                         </div>

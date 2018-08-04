@@ -21,7 +21,7 @@
     </sql>
 
     <sql id="professInfo">
-         o.id,
+        o.id,
         o.deleted,
         o.invalid,
         o.`level`,
@@ -32,7 +32,8 @@
         o.salary,
         o.student_num AS studentNum,
         o.create_time AS createTime ,
-        o.update_time AS updateTime
+        o.update_time AS updateTime,
+        o2.profess_name AS parentName
     </sql>
 
     <!-- 查询列表数据 -->
@@ -48,6 +49,19 @@
             o.profess_name LIKE '%${professName}%'
     </select>
 
+    <!-- 查询所有生效的专业列表 -->
+    <select id="findProfessAll" parameterType="map" resultType="map">
+        SELECT
+          <include refid="professInfo" />
+        FROM
+          official_profess o
+        LEFT JOIN official_profess o2 ON o.parent_id = o2.id
+        WHERE
+          o.deleted = 0
+        and
+          o.invalid = 0
+    </select>
+
     <!-- 查询所有一级专业 -->
     <select id="findParentProfess" resultType="map">
         SELECT
@@ -59,6 +73,8 @@
             deleted = 0
         AND
             invalid = 0
+        AND
+            parent_id = 0
     </select>
 
     <select id="findProfessById" parameterType="java.lang.Integer" resultType="map" >
@@ -66,8 +82,9 @@
             <include refid="professInfo" />
         FROM
             official_profess o
+        LEFT JOIN official_profess o2 ON o.parent_id = o2.id
         WHERE
-            id = #{id}
+            o.id = #{id}
     </select>
 
     <!--新增专业-->
@@ -118,7 +135,7 @@
             <if test="salary != null and salary != ''" >
                 #{salary,jdbcType=VARCHAR},
             </if>
-            <if test="studentNum != null" >
+            <if test="studentNum != null and studentNum != ''" >
                 #{studentNum,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null" >

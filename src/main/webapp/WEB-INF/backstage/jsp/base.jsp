@@ -17,6 +17,8 @@
         String jqueryPath=applicationPath+"/res/js/jquery-1.10.2.min.js";
         String layuiPath=applicationPath+"/res/layui/layui-v2.2.6";
         String ztreePath=applicationPath+"/res/ztree/ztree-v3.5.26";
+
+        String proImagesPath=applicationPath+"/static/images";
     %>
 
     <link rel="stylesheet" href="<%=ztreePath%>/css/metroStyle/metroStyle.css" media="all">

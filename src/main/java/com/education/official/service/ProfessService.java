@@ -52,4 +52,11 @@ public interface ProfessService {
      */
     List<Map> findParentProfess();
 
+    /**
+     * 查询所有生效的专业列表
+     *
+     * @return
+     */
+    List<Map> findProfessAll();
+
 }
