@@ -73,18 +73,19 @@
                     <a href="javascript:;"><img src="<%=imagesPath%>/nav_icon_car_20.png"/><span>专业管理</span></a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" kit-target data-options="{url:'${pageContext.request.contextPath }/professList',icon:'',title:'专业管理',id:'111'}"><span> 专业管理</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" data-url="form.html"  kit-target data-options="{url:'<%=applicationPath%>/authc/vehicleList.html',icon:'',title:'车辆信息',id:'100'}"><span> 车辆信息</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" data-url="nav.html"   kit-target data-options="{url:'<%=applicationPath%>/authc/driver/driverList.html',icon:'',title:'驾驶员信息',id:'103'}"><span> 驾驶员信息</span></a>
+                            <a href="javascript:;" kit-target data-options="{url:'${pageContext.request.contextPath }/professList',icon:'',title:'专业管理',id:'110'}"><span> 专业管理</span></a>
                         </dd>
                     </dl>
                 </li>
 
-                <li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'运维管理',id:'300'}"><img src="<%=imagesPath%>/nav_icon_maintain_20.png"><span> 运维管理</span></a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><img src="<%=imagesPath%>/nav_icon_maintain_20.png"><span> 招生咨询</span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;" kit-target data-options="{url:'<%=applicationPath%>/getQuestionList',icon:'',title:'问答管理',id:'120'}"><span> 问答管理</span></a>
+                        </dd>
+                    </dl>
+                </li>
                 <li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'验收管理',id:'400'}"><img src="<%=imagesPath%>/nav_icon_statistics_20.png"><span> 验收管理</span></a></li>
                 <li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'平台管理',id:'500'}"><img src="<%=imagesPath%>/nav_icon_platform_20.png"><span> 平台管理</span></a></li>
                 <li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'任务管理',id:'600'}"><img src="<%=imagesPath%>/nav_icon_task_20.png"><span> 任务管理</span></a></li>

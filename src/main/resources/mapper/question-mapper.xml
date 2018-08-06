@@ -1,0 +1,91 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.education.official.mapper.QuestionMapper">
+
+    <sql id="questionList">
+        q.id,
+        q.deleted,
+        q.invalid,
+        q.question,
+        q.answer,
+        q.create_time AS createTime ,
+        q.update_time AS updateTime
+    </sql>
+
+    <!-- 根据ID查询问答信息 -->
+    <select id="findQuestionById" parameterType="Integer" resultType="map">
+        SELECT
+          <include refid="questionList" />
+        FROM
+          question_answer q
+        WHERE
+          q.id = #{id}
+    </select>
+
+    <!-- 查询列表数据 -->
+    <select id="findQuestionList" parameterType="map" resultType="map">
+        SELECT
+          <include refid="questionList" />
+        FROM
+          question_answer q
+        WHERE
+          q.deleted = 0
+        <if test="question != null and question != '' ">
+            AND
+            q.question LIKE '%${question}%'
+        </if>
+    </select>
+
+    <!-- 新增问答 -->
+    <insert id="addQuestion" parameterType="com.education.official.pojo.QuestionAnswer">
+        INSERT INTO question_answer
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="question != null and question != ''" >
+                question,
+            </if>
+            <if test="answer != null and answer != ''" >
+                answer,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="question != null and question != ''" >
+                #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null and answer != ''" >
+                #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateQuestin" parameterType="com.education.official.pojo.QuestionAnswer">
+        UPDATE question_answer
+        <set>
+            <if test="question != null and question != ''" >
+                question = #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null and answer != ''" >
+                answer = #{answer},
+            </if>
+            <if test="invalid != null" >
+                invalid = #{invalid,jdbcType=BIT},
+            </if>
+            <if test="deleted != null" >
+                deleted = #{deleted,jdbcType=BIT},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+
+</mapper>
