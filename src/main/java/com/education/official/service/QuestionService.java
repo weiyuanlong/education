@@ -2,6 +2,8 @@ package com.education.official.service;
 
 import com.education.official.pojo.QuestionAnswer;
 import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,5 +44,12 @@ public interface QuestionService {
      * @return
      */
     Map findQuestionById(Integer id);
+
+    /**
+     * 查询所有问答
+     *
+     * @return
+     */
+    List<Map> findQuestionAll();
 
 }

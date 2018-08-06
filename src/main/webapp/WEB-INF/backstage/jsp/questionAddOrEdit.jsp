@@ -39,24 +39,8 @@
             min-width: 300px;
         }
 
-        .ztree li {
-            margin-top: 12px;
-        }
-        .ztree li span{
-            font-size: 14px;
-        }
-        .ztree li span:hover{
-            font-size: 14px;
-            color: #222;
-        }
-        .ztree li a:hover{
-            text-decoration : none;
-        }
-        .ztree li span.button.chk{
-            width: 17px;
-            height: 16px;
-            margin-left: 12px;
-            margin-right: 8px;
+        .layui-inline{
+            width: 80%
         }
 
     </style>
@@ -75,16 +59,20 @@
             </div>
             <div class="portlet-body">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">问题</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="question" required value="{{d.question==undefined?'':d.question}}"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">问题</label>
+                        <div class="layui-inline">
+                            <input type="text" name="question" required value="{{d.question==undefined?'':d.question}}"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
                     </div>
                 </div>
 
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">回答</label>
-                    <div class="layui-input-block">
-                        <textarea name="answer" placeholder="请输入内容" class="layui-textarea">{{d.question==undefined?'':d.question}}</textarea>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">回答</label>
+                        <div class="layui-inline">
+                            <textarea name="answer" id="demo" placeholder="请输入内容" class="layui-textarea">{{d.answer==undefined?'':d.answer}}</textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -124,6 +112,7 @@
             mylayer.closeAll();
             if(data.success){
                 initTpl(data.data);
+
             }else{
                 mylayer.alert(data.msg);
             }
@@ -146,6 +135,11 @@
         laytpl(getUserTpl).render(data, function(html){
             view.html(html);
             form.render();
+        });
+
+        layui.use('layedit', function(){
+            var layedit = layui.layedit;
+            layedit.build('demo'); //建立编辑器
         });
     }
 

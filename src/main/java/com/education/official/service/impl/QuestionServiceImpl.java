@@ -66,4 +66,13 @@ public class QuestionServiceImpl extends BaseService implements QuestionService 
         return questionMapper.findQuestionById(id);
     }
 
+    /**
+     * @see QuestionService#findQuestionAll()
+     *
+     */
+    @Override
+    public List<Map> findQuestionAll() {
+        return questionMapper.findQuestionList(null);
+    }
+
 }
