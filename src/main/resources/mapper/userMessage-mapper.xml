@@ -1,0 +1,86 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.education.official.mapper.UserMessageMapper">
+
+    <sql id="professList">
+
+    </sql>
+
+    <!-- 查询列表数据 -->
+    <select id="findProfessList" parameterType="map" resultType="map">
+        SELECT
+            <include refid="professList" />
+        FROM
+            user_message u
+        WHERE
+            u.deleted = 0
+        AND
+            u.user_name LIKE '%${userName}%'
+        AND
+            u.status = #{status}
+    </select>
+
+    <!--新增专业-->
+    <insert id="insertUserMessage" parameterType="com.education.official.pojo.UserMessage">
+        INSERT INTO user_message
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="content != null and content != ''" >
+                content,
+            </if>
+            <if test="userName != null and userName != ''" >
+                user_name,
+            </if>
+            <if test="telephone != null and telephone != ''" >
+                telephone,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="content != null and content != ''" >
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null and userName != ''" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null and telephone != ''" >
+                #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改专业 -->
+    <update id="updateUserMessage" parameterType="com.education.official.pojo.UserMessage">
+        UPDATE user_message
+        <set>
+            <if test="userName != null and userName != ''" >
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null and telephone != ''" >
+                telephone = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null and content != ''" >
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=BIT},
+            </if>
+            <if test="deleted != null" >
+                deleted = #{deleted,jdbcType=BIT},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE
+          id = #{id}
+    </update>
+
+
+</mapper>
