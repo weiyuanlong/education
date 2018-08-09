@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
@@ -57,7 +58,7 @@ public class QuestionAnswerController extends BaseController {
      */
     @RequestMapping("queryQuestion")
     @ResponseBody
-    public String queryQuestion(Map paramMap) {
+    public String queryQuestion(@RequestParam Map paramMap) {
         try {
             PageInfo pageInfo = questionService.findQuestionList(paramMap);
             convertList(pageInfo);

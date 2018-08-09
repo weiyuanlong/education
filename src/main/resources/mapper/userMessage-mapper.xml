@@ -4,22 +4,34 @@
 
 <mapper namespace="com.education.official.mapper.UserMessageMapper">
 
-    <sql id="professList">
-
+    <sql id="userMessageList">
+        u.id,
+        u.create_time AS createTime,
+        u.update_time AS updateTime,
+        u.user_name AS userName,
+        u.telephone,
+        u.content,
+        u.`status`
     </sql>
 
     <!-- 查询列表数据 -->
-    <select id="findProfessList" parameterType="map" resultType="map">
+    <select id="findUserMessageAll" parameterType="map" resultType="map">
         SELECT
-            <include refid="professList" />
+            <include refid="userMessageList" />
         FROM
             user_message u
         WHERE
             u.deleted = 0
-        AND
-            u.user_name LIKE '%${userName}%'
-        AND
-            u.status = #{status}
+        <if test="userName != null and userName !=  ''">
+            AND u.user_name LIKE '%${userName}%'
+        </if>
+        <if test="telephone != null and telephone !=  ''">
+            AND u.telephone LIKE '%${telephone}%'
+        </if>
+        <if test="status != null and status != ''">
+            AND u.status = #{status}
+        </if>
+
     </select>
 
     <!--新增专业-->

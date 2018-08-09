@@ -86,16 +86,23 @@
                         </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'验收管理',id:'400'}"><img src="<%=imagesPath%>/nav_icon_statistics_20.png"><span> 验收管理</span></a></li>
-                <li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'平台管理',id:'500'}"><img src="<%=imagesPath%>/nav_icon_platform_20.png"><span> 平台管理</span></a></li>
-                <li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'任务管理',id:'600'}"><img src="<%=imagesPath%>/nav_icon_task_20.png"><span> 任务管理</span></a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><img src="<%=imagesPath%>/nav_icon_statistics_20.png"><span> 留言管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;" kit-target data-options="{url:'<%=applicationPath%>/getUserMessageList',icon:'',title:'用户留言',id:'121'}"><span> 用户留言</span></a>
+                        </dd>
+                    </dl>
+                </li>
+                <%--<li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'平台管理',id:'500'}"><img src="<%=imagesPath%>/nav_icon_platform_20.png"><span> 平台管理</span></a></li>
+                <li class="layui-nav-item"><a href="javascript:;" kit-target data-options="{url:'',icon:'',title:'任务管理',id:'600'}"><img src="<%=imagesPath%>/nav_icon_task_20.png"><span> 任务管理</span></a></li>--%>
             </ul>
         </div>
     </div>
     <div class="layui-body" id="container">
     </div>
 
-    <div class="layui-footer"  style="text-align: center;background-color:#f0f2f5"> <%----%>
+    <div class="layui-footer"  style="text-align: center;background-color:#f0f2f5">
         <!-- 底部固定区域 -->
         ©CopyRight 2018 ${user.org.orgName}
 

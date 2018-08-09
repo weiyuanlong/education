@@ -45,8 +45,15 @@
         LEFT JOIN official_profess o2 ON o.parent_id = o2.id
         WHERE
             o.deleted = 0
-        AND
+        <if test="parentName != null and parentName != '' ">
+            AND
+            o2.profess_name LIKE '%${parentName}%'
+        </if>
+        <if test="professName != null and professName != '' ">
+            AND
             o.profess_name LIKE '%${professName}%'
+        </if>
+
     </select>
 
     <!-- 查询所有生效的专业列表 -->

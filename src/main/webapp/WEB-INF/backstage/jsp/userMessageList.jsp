@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>专业管理</title>
+    <title>用户留言管理</title>
     <link rel="stylesheet" href="<%=layuiPath%>/css/layui.css" media="all">
     <link rel="stylesheet" href="<%=cssPath%>/doc.css" media="all">
     <link rel="stylesheet" href="<%=cssPath%>/main.css">
@@ -19,27 +19,38 @@
             <div id="toolbox">
                 <form class="layui-form" id="dataForm" onsubmit="return pagedataHandel.sumbit();" >
                     <div class="layui-row">
-                        <div class="layui-col-md4 layui-col-xs4">
+                        <div class="layui-col-md3 layui-col-xs3">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">专业名称</label>
+                                <label class="layui-form-label">姓名</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="professName" lay-verify="" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    <input type="text" name="userName" lay-verify="" placeholder="请输入" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                         </div>
-                        <div class="layui-col-md4 layui-col-xs4">
+                        <div class="layui-col-md3 layui-col-xs3">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">上级专业</label>
+                                <label class="layui-form-label">电话</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="parentName" lay-verify="" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    <input type="text" name="telephone" lay-verify="" placeholder="请输入" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                         </div>
-                        <div class="layui-col-md4 layui-col-xs4" >
+                        <div class="layui-col-md3 layui-col-xs3">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">处理状态</label>
+                                <div class="layui-input-inline">
+                                    <select name="status" lay-filter="" lay-verify="" lay-search>
+                                        <option value="">请选择</option>
+                                        <option value=0>未处理</option>
+                                        <option value=1>已处理</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-xs3" >
                             <div class="layui-form-item">
                                 <div class="layui-input-block" style="text-align: center;margin-right: 70px">
                                     <button  class="layui-btn layui-btn-normal"  lay-filter="submit">查询</button>
-                                    <input type="button" class="layui-btn layui-btn-normal"  lay-filter="add" onclick="addUser()" value="添加" />
                                 </div>
                             </div>
                         </div>
@@ -68,85 +79,55 @@
 </script>
 <script type="text/html" id="opreationTool">
     <div style="width: 100%;text-align: center;">
-        <a class="opreation" onclick="editUser('{{d.id}}','{{d.professName}}')" >编辑</a>
+        <a class="opreation" onclick="deleteData('{{d.id}}','{{d.userName}}','deleteUserMessageStatus')">删除</a>
         &nbsp;&nbsp;<span class="dispan">|</span>&nbsp;&nbsp;
-        <a class="opreation" onclick="deleteData('{{d.id}}','{{d.professName}}','deleteProfess')">删除</a>
-        &nbsp;&nbsp;<span class="dispan">|</span>&nbsp;&nbsp;
-        {{#  if(d.invalid){ }}
-            <a class="opreation" style="color: red" onclick="invalid('{{d.id}}',false,'updateProfess')">启用</a>
+        {{#  if(d.status){ }}
+            <a class="opreation" style="color: red" onclick="upStatus('{{d.id}}',false,'updateUserMessageStatus')">取消处理</a>
         {{#  } else { }}
-            <a class="opreation" onclick="invalid('{{d.id}}',true,'updateProfess')">停用</a>
+            <a class="opreation" onclick="upStatus('{{d.id}}',true,'updateUserMessageStatus')">处理</a>
         {{#  } }}
     </div>
 </script>
 
 <script type="text/html" id="statusTool">
-    {{#  if(d.invalid){ }}
-        停用
+    {{#  if(d.status){ }}
+        已处理
     {{#  } else { }}
-        正常
+        未处理
     {{#  } }}
 </script>
 <script>
-    var searchUrl = "<%=applicationPath %>/findProfessList";
-    var cols=[[ //标题栏
-        {field: '', title: '', width: '5%',templet: '#ID'}
-        ,{field: 'professName', title: '专业名称', width:'10%'}
-        ,{field: 'quartName', title: '岗位', width: '10%'}
-        ,{field: 'salary', title: '薪资待遇', width: '10%'}
-        ,{field: 'studentNum', title: '招生数量', width: '10%'}
-        ,{field: 'parentName', title: '上级专业', width: '10%'}
-        ,{field: 'invalid', title: '状态', width:'5%',toolbar: '#statusTool'}
-        ,{field: 'createTime', title: '创建时间', width:'12.5%'}
-        ,{field: 'updateTime', title: '修改时间', width:'12.5%'}
-        ,{field: 'operation', title: '操作', width:'15.2%',toolbar: '#opreationTool', unresize: true}
+    var searchUrl = "<%=applicationPath %>/findUserMessageAll";
+    var cols = [[ //标题栏
+        {field: '', title: '', width: '5%', templet: '#ID'}
+        , {field: 'userName', title: '姓名', width: '10%'}
+        , {field: 'telephone', title: '电话', width: '10%'}
+        , {field: 'content', title: '留言', width: '30%'}
+        , {field: 'status', title: '处理状态', width: '8%', toolbar: '#statusTool'}
+        , {field: 'createTime', title: '创建时间', width: '12.5%'}
+        , {field: 'updateTime', title: '修改时间', width: '12.5%'}
+        , {field: 'operation', title: '操作', width: '12.1%', toolbar: '#opreationTool', unresize: true}
     ]];
 
-    $(function(){
+    $(function () {
         //加载数据表格
         pagedataHandel.init();
-        pagedataHandel.initData(searchUrl,cols);
+        pagedataHandel.initData(searchUrl, cols);
     });
 
     /**
-     * 新增
-     */
-    function addUser() {
-        addNav(112,'添加','<%=applicationPath %>/addOrProfessPage');
-    }
-
-    /**
-     * 编辑
-     * @param id
-     * @param title
-     */
-    function editUser(id,title) {
-        addNav(712+'-'+id,'编辑'+'-'+title,'<%=applicationPath %>/addOrProfessPage?id='+id,"&#xe642;");
-    }
-
-    /**
-     * 查看详情
-     * @param id
-     * @param title
-     */
-    function viewUser(id,title) {
-        addNav((713+'-'+id),'详情'+'-'+title,'<%=applicationPath %>/authc/viewUser.html?id='+id,"&#xe62a;");
-    }
-
-
-    /**
-     *修改状态
+     *停用
      * @param id
      * @param type
      */
-    function update(id,userState) {
+    function upStatus(id, invalid, ctrl) {
         var title = "";
-        if (userState == 2)
-            title = "停用？";
+        if (invalid)
+            title = "确定标记为处理吗？";
         else
-            title = "启用？";
-        var url = "<%=applicationPath %>/authc/setUserState.html";
-        var data = {id: id, userState: userState};
+            title = "确定恢复吗？";
+        var url = "<%=applicationPath %>/"+ctrl;
+        var data = {id: id, status: invalid};
         var successFun=function(data){
             mylayer.closeAll();
             if(data.success)
