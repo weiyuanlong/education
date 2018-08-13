@@ -10,7 +10,9 @@
 		<link rel="stylesheet" type="text/css" href="<%=cssPath%>/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="<%=cssPath%>/main.css" />
 	</head>
-
+    <style>
+        .news-con ul li img{width:100% !important;}
+    </style>
 	<body>
 		<jsp:include page="topCommon.jsp"/>
 		
@@ -40,15 +42,28 @@
 				</section>
 				<div class="news-con con-pad">
 					<ul>
-						<li>
-							<a href="news-detail1.html">
-								<h2>国家邮政局发通告要求严格落实收寄验视制度</h2>
-								<span>2017-7-13</span>
-								<p>
-									新华网北京8月1日电国家邮政局近日会同公安部、国家安全部联合发出通告，要求切实维护南京青奥会期间的寄递物品安全，严格落实收寄验视制度.
-								</p>
-							</a>
-						</li>
+					    <div clss="container">
+                            <li class="col-md-3 col-md-offset-1">
+                                <img id="pic_1" src='<%=imagesPath%>/butiful/corpor/corpor1.png' />
+                            </li>
+                            <li class="col-md-3 col-md-offset-1">
+                                <img id="pic_2" src='<%=imagesPath%>/butiful/corpor/corpor2.png' />
+                            </li>
+                            <li class="col-md-3 col-md-offset-1">
+                                <img id="pic_3" src='<%=imagesPath%>/butiful/corpor/corpor3.png' />
+                            </li>
+                        </div>
+					    <div clss="container">
+                            <li class="col-md-3 col-md-offset-1">
+                                <img id="pic_4" src='<%=imagesPath%>/butiful/corpor/corpor4.png' />
+                            </li>
+                            <li class="col-md-3 col-md-offset-1">
+                                <img id="pic_5" src='<%=imagesPath%>/butiful/corpor/corpor5.png' />
+                            </li>
+                            <li class="col-md-3 col-md-offset-1">
+                                <img id="pic_6" src='<%=imagesPath%>/butiful/corpor/corpor6.png' />
+                            </li>
+                        </div>
 					</ul>
 				</div>
 			</div>
@@ -64,15 +79,27 @@
 <script>
 
 	function showSchool() {
-
+	    var selectId = "";
+        for(var i = 1; i <= 6; i++) {
+            selectId = "#pic_" + i;
+            $(selectId).attr('src','<%=imagesPath%>/butiful/school/school'+i+'.png');
+        }
 	}
 
     function showStudent() {
-
+        var selectId = "";
+        for(var i = 1; i <= 6; i++) {
+            selectId = "#pic_" + i;
+            $(selectId).attr('src','<%=imagesPath%>/butiful/student/student'+i+'.png');
+        }
     }
 
     function showCorpor() {
-
+        var selectId = "";
+        for(var i = 1; i <= 6; i++) {
+            selectId = "#pic_" + i;
+            $(selectId).attr('src','<%=imagesPath%>/butiful/corpor/corpor'+i+'.png');
+        }
     }
 
 </script>

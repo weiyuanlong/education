@@ -18,7 +18,7 @@
 
 		<!-- sec -->
 		<div class="sec aboutpg container">
-			<div class="col-sm-9 introduce">
+			<div class="col-sm-12 introduce">
 				<section class="title">
 					<h1>
 						学校介绍

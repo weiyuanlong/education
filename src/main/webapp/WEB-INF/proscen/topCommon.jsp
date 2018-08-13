@@ -4,6 +4,17 @@
 <head>
     <title>Title</title>
 </head>
+<style>
+    @media  screen and (min-width: 992px){
+        .carousel-inner .item img{width:100% !important;height:550px !important;}
+     }
+     @media  screen and (min-width: 768px) and (max-width: 992px) {
+        .carousel-inner .item img{width:100% !important;height:550px !important;}
+     }
+     @media  screen and (max-width: 767px) {
+         .carousel-inner .item img{width:auto !important;height:auto !important;}
+     }
+</style>
 <body>
 
 <nav class="navbar navbar-default">
