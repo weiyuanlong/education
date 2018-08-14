@@ -50,7 +50,7 @@
 
 <div class="tab-body" id="dictTypeInfo"></div>
 <script type="text/html" id="dictTypeInfoModle">
-    <form class="layui-form" action="">
+    <form id="myForm" class="layui-form" action="">
         <input type="hidden" name="id" value="${requestScope.id==null||requestScope.id==''?null:requestScope.id}"/>
         <div class="portlet box" style="height: 85%">
             <div class="portlet-header">
@@ -71,7 +71,8 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">回答</label>
                         <div class="layui-inline">
-                            <textarea name="answer" id="demo" placeholder="请输入内容" class="layui-textarea">{{d.answer==undefined?'':d.answer}}</textarea>
+                            <textarea name="answer" id="demo" placeholder="请输入内容" class="layui-textarea"></textarea>
+                            <!-- {{d.answer==undefined?'':d.answer}} -->
                         </div>
                     </div>
                 </div>
@@ -124,6 +125,9 @@
         myajax.ajax(url,{id:id});
     }
 
+    var layedit;
+    var buildIndex;
+
     /**
      * 加载模板
      */
@@ -138,8 +142,9 @@
         });
 
         layui.use('layedit', function(){
-            var layedit = layui.layedit;
-            layedit.build('demo'); //建立编辑器
+            layedit = layui.layedit;
+            buildIndex = layedit.build('demo'); //建立编辑器
+            layedit.setContent(buildIndex,data.answer,false);
         });
     }
 
@@ -147,26 +152,23 @@
      * 表单提交
      */
     form.on('submit(submitButton)', function (data) {
-        var param = JSON.stringify(data.field);
-        console.log(param);
-
-        mylayer.loaders('加载中。。。');
-        myajax.success=function(data){
-            mylayer.closeAll();
-            if(data.success)
-            {
-                mylayer.alert(data.message,1);
-            }else {
+        layedit.sync(buildIndex);
+        $.ajax({
+            type: "POST",
+            dataType: "json",//预期服务器返回的数据类型
+            url: '<%=applicationPath%>/addOrEditQuestion' ,
+            data: $("#myForm").serialize(),
+            success: function (data) {
+                if(data.success) {
+                    mylayer.alert(data.message,1);
+                }else {
+                    mylayer.alert(data.message,5);
+                }
+            },
+            error : function() {
                 mylayer.alert(data.message,5);
             }
-        };
-        myajax.error=function (data) {
-            mylayer.alert("网络异常",5,6);
-        };
-        var url="<%=applicationPath%>/addOrEditQuestion"
-        myajax.contentType="application/json; charset=utf-8";
-        myajax.ajax(url,param);
-        return false;
+        });
     });
 
 </script>

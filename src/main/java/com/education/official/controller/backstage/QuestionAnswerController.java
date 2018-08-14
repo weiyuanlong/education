@@ -77,7 +77,7 @@ public class QuestionAnswerController extends BaseController {
      */
     @RequestMapping("addOrEditQuestion")
     @ResponseBody
-    public String addOrEditQuestion(@RequestBody QuestionAnswer questionAnswer) {
+    public String addOrEditQuestion(QuestionAnswer questionAnswer) {
         try {
             if(questionAnswer.getId() == null) {
                 // 添加操作
