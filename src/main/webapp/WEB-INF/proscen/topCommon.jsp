@@ -27,7 +27,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"><img src="static/images/logo.png"></a>
+            <a class="navbar-brand" href="index.html"><img src="<%=imagesPath%>/logo.png"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

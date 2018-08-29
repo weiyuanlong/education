@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @Modified By:
  */
 @Controller
-@RequestMapping("pro")
 public class IndexController {
 
     /**
@@ -20,8 +19,20 @@ public class IndexController {
      *
      * @return
      */
-    @RequestMapping("getIndex")
+    @RequestMapping("/pro/getIndex")
     public ModelAndView getIndex(String menu, ModelAndView modelAndView) {
+        modelAndView.addObject("menu",menu);
+        modelAndView.setViewName("proscen/index");
+        return modelAndView;
+    }
+
+    /**
+     * 跳转前台首页
+     *
+     * @return
+     */
+    @RequestMapping("/")
+    public ModelAndView findIndex(String menu, ModelAndView modelAndView) {
         modelAndView.addObject("menu",menu);
         modelAndView.setViewName("proscen/index");
         return modelAndView;

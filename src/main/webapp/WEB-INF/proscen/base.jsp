@@ -16,6 +16,5 @@
         String jsPath=applicationPath+"/static/js";
     %>
 
-
 </head>
 </html>
